@@ -1,5 +1,5 @@
-# Highlite Inventory Tooltips Plugin
-
+# Inventory Tooltips Plugin 
+### Author `valsekamerplant`
 ## Functionality
 - see item names in inventory
 - see amount an item will heal (overhealing will be shown in a differnt color)

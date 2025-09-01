@@ -247,20 +247,21 @@ class InventoryTooltips extends Plugin {
                 }
             }
             for (const bonus of consumableBonuses) {
-                let value = bonus._amount;
+                let value = bonus._effect._amount;
                 let valueDisplay = value;
                 let colorClass = '';
                 let isPercent = false;
+
                 // If value is float, treat as percent of skill
                 if (typeof value === 'number' && !Number.isInteger(value)) {
                     isPercent = true;
                     // Get current skill value
                     let skillValue = 0;
-                    if (bonus._skill === 0) {
+                    if (bonus._effect._skill === 0) {
                         skillValue = currentHp;
                     } else {
                         // Try to get skill value from combined array
-                        const skillObj = allSkills[bonus._skill];
+                        const skillObj = allSkills[bonus._effect._skill];
                         skillValue = skillObj?._level ?? 1;
                     }
                     valueDisplay = Math.round(skillValue * value);
@@ -274,7 +275,7 @@ class InventoryTooltips extends Plugin {
                     colorClass = 'hlt-tooltip-edible-heal-normal';
                 }
                 bonusText += `<div class="hs-ui-item-tooltip-effect"> • 
-                <span class="hlt-tooltip-bonus ${colorClass}">${value < 0 ? '-' : '+'}${isPercent ? Math.max(valueDisplay, 1) : value}${isPercent ? ' (' + Math.round(value * 100) + '%)' : ''}</span> ${this.getSkillName(bonus._skill)}</div>`;
+                <span class="hlt-tooltip-bonus ${colorClass}">${value < 0 ? '-' : '+'}${isPercent ? Math.max(valueDisplay, 1) : value}${isPercent ? ' (' + Math.round(value * 100) + '%)' : ''}</span> ${this.getSkillName(bonus._effect._skill)}</div>`;
             }
             bonusText += `</div>`;
         }
